@@ -2,16 +2,16 @@
 # This file is distributed under the GPL2+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Genesis Blocks 3.1.7\n"
+"Project-Id-Version: Genesis Blocks 3.1.8\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/genesis-blocks\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2025-03-19T16:21:34+00:00\n"
+"POT-Creation-Date: 2025-12-05T10:19:22+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.11.0\n"
+"X-Generator: WP-CLI 2.12.0\n"
 "X-Domain: genesis-blocks\n"
 
 #. Plugin Name of the plugin
@@ -53,16 +53,19 @@ msgstr ""
 
 #. translators: %s: The missing key that is required to register a component.
 #: includes/layout/class-component-registry.php:88
+#, php-format
 msgid "You must supply a %s to register a layout."
 msgstr ""
 
 #. translators: %s: The component's unique key.
 #: includes/layout/class-component-registry.php:96
+#, php-format
 msgid "The %s layout is already registered."
 msgstr ""
 
 #. translators: %s: The component's unique key.
 #: includes/layout/class-component-registry.php:104
+#, php-format
 msgid "The %s section is already registered."
 msgstr ""
 
@@ -72,28 +75,33 @@ msgstr ""
 #: includes/layout/class-component-registry.php:111
 #: includes/layout/class-component-registry.php:128
 #: includes/layout/class-component-registry.php:192
+#, php-format
 msgid "You must supply a valid component type in %s."
 msgstr ""
 
 #. translators: %s: This function's name. Will always be Genesis\Blocks\Layouts\Component_Registry::remove().
 #: includes/layout/class-component-registry.php:133
+#, php-format
 msgid "You must supply a valid component key in %s."
 msgstr ""
 
 #. translators: The requested components unique key.
 #: includes/layout/class-component-registry.php:142
 #: includes/layout/class-component-registry.php:179
+#, php-format
 msgid "The %s layout is not registered."
 msgstr ""
 
 #. translators: The requested components unique key.
 #: includes/layout/class-component-registry.php:150
 #: includes/layout/class-component-registry.php:186
+#, php-format
 msgid "The %s section is not registered."
 msgstr ""
 
 #. translators: This function name. Will always be Genesis\Blocks\Layouts\Component_Registry::get().
 #: includes/layout/class-component-registry.php:172
+#, php-format
 msgid "You must supply a component type in %s."
 msgstr ""
 
@@ -894,6 +902,7 @@ msgstr ""
 
 #. translators: %1$: opening i tag, %2$: closing i tag
 #: lib/Settings/views/admin/tabs/genesis-101.php:27
+#, php-format
 msgid "%1$sBlock%2$s is a term used for any kind of content that you add in the new WordPress editor. When editing, anything you insert within a page or a post is a block. WordPress includes a few default blocks such as the Paragraph, Image, Heading, Gallery, etc. that give you a great head start."
 msgstr ""
 
@@ -1222,6 +1231,7 @@ msgstr ""
 
 #. translators: %1$: opening anchor tag, %2$: closing anchor tag
 #: lib/Settings/views/admin/tabs/genesis-collections.php:34
+#, php-format
 msgid "When %1$sediting a page%2$s in your website, you can access Genesis Collections by clicking the “Layouts” button in the top menu bar."
 msgstr ""
 
@@ -1481,6 +1491,7 @@ msgstr ""
 
 #. translators: %s This PHP class name. Will print Genesis\Blocks\Newsletter\Mailchimp
 #: src/blocks/block-newsletter/includes/classes/class-mailchimp.php:40
+#, php-format
 msgid "An API key is required to use %s."
 msgstr ""
 
@@ -1490,11 +1501,13 @@ msgstr ""
 
 #. translators: %s The PHP method name. Will be Genesis\Blocks\Newsletter\Mailchimp\subscribe.
 #: src/blocks/block-newsletter/includes/classes/class-mailchimp.php:88
+#, php-format
 msgid "An invalid Mailchimp list ID was provided in %s"
 msgstr ""
 
 #. translators: %s The error message returns from the Mailchimp API.
 #: src/blocks/block-newsletter/includes/classes/class-mailchimp.php:105
+#, php-format
 msgid "There was an error subscribing your email address. Please try again. Error: %s"
 msgstr ""
 
