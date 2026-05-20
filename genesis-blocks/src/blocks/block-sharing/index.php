@@ -111,7 +111,8 @@ function genesis_blocks_render_sharing( $attributes ) {
 		$thumbnail_id = get_post_thumbnail_id( $post->ID );
 		$thumbnail    = $thumbnail_id ? current( wp_get_attachment_image_src( $thumbnail_id, 'large', true ) ) : '';
 	} else {
-		$thumbnail = null;
+		// Use an empty string so esc_url() never receives null.
+		$thumbnail = '';
 	}
 
 	$is_amp_endpoint = function_exists( 'is_amp_endpoint' ) && is_amp_endpoint();
@@ -122,7 +123,8 @@ function genesis_blocks_render_sharing( $attributes ) {
 
 	$linkedin_url = 'https://www.linkedin.com/shareArticle?mini=true&url=' . get_the_permalink() . '&title=' . get_the_title() . '';
 
-	$pinterest_url = 'https://pinterest.com/pin/create/button/?&url=' . get_the_permalink() . '&description=' . get_the_title() . '&media=' . esc_url( $thumbnail ) . '';
+	$pinterest_media = ! empty( $thumbnail ) ? esc_url( $thumbnail ) : '';
+	$pinterest_url   = 'https://pinterest.com/pin/create/button/?&url=' . get_the_permalink() . '&description=' . get_the_title() . '&media=' . $pinterest_media . '';
 
 	$email_url = 'mailto:?subject=' . get_the_title() . '&body=' . get_the_title() . '&mdash;' . get_the_permalink() . '';
 
@@ -265,16 +267,23 @@ function genesis_blocks_render_sharing( $attributes ) {
 		}
 	}
 
+	// IMPORTANT: never pass null into sprintf class placeholders.
+	$share_button_style = isset( $attributes['shareButtonStyle'] ) ? esc_attr( $attributes['shareButtonStyle'] ) : '';
+	$share_button_shape = isset( $attributes['shareButtonShape'] ) ? esc_attr( $attributes['shareButtonShape'] ) : '';
+	$share_button_size  = isset( $attributes['shareButtonSize'] ) ? esc_attr( $attributes['shareButtonSize'] ) : '';
+	$share_button_color = isset( $attributes['shareButtonColor'] ) ? esc_attr( $attributes['shareButtonColor'] ) : '';
+	$share_alignment    = isset( $attributes['shareAlignment'] ) ? 'gb-align-' . esc_attr( $attributes['shareAlignment'] ) : '';
+
 	$block_content = sprintf(
 		'<div class="wp-block-genesis-blocks-gb-sharing gb-block-sharing %2$s %3$s %4$s %5$s %6$s">
 			<ul class="gb-share-list">%1$s</ul>
 		</div>',
 		$share_url,
-		isset( $attributes['shareButtonStyle'] ) ? esc_attr( $attributes['shareButtonStyle'] ) : null,
-		isset( $attributes['shareButtonShape'] ) ? esc_attr( $attributes['shareButtonShape'] ) : null,
-		isset( $attributes['shareButtonSize'] ) ? esc_attr( $attributes['shareButtonSize'] ) : null,
-		isset( $attributes['shareButtonColor'] ) ? esc_attr( $attributes['shareButtonColor'] ) : null,
-		isset( $attributes['shareAlignment'] ) ? 'gb-align-' . esc_attr( $attributes['shareAlignment'] ) : null
+		$share_button_style,
+		$share_button_shape,
+		$share_button_size,
+		$share_button_color,
+		$share_alignment
 	);
 
 	return $block_content;

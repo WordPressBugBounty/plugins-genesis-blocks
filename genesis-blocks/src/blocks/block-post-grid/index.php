@@ -223,7 +223,7 @@ function genesis_blocks_render_block_core_latest_posts( $attributes ) {
 			}
 
 			if ( ! $excerpt ) {
-				$excerpt = null;
+				$excerpt = '';
 			}
 
 			if ( isset( $attributes['displayPostExcerpt'] ) && $attributes['displayPostExcerpt'] ) {

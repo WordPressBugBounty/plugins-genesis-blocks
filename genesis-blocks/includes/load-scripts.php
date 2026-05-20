@@ -11,6 +11,10 @@
 /**
  * Enqueue assets for frontend and backend
  *
+ * This function uses the 'enqueue_block_assets' hook instead of 'init' to ensure
+ * that editor styles are properly loaded in the iframe editor (WordPress 5.9+).
+ * This prevents the warning: "genesis-blocks-block-editor-css-css was added to the iframe incorrectly"
+ *
  * @since 1.0.0
  */
 function genesis_blocks_block_assets() {
@@ -18,18 +22,35 @@ function genesis_blocks_block_assets() {
 	// phpcs:ignore WordPress.PHP.StrictComparisons.LooseComparison -- Could be true or 'true'.
 	$postfix = ( SCRIPT_DEBUG == true ) ? '' : '.min';
 
-	// Load the compiled styles.
+	// Load the compiled styles for both frontend and editor
+	// This ensures styles work correctly in both contexts
 	wp_enqueue_style(
 		'genesis-blocks-style-css',
 		plugins_url( 'dist/style-blocks.build.css', dirname( __FILE__ ) ),
 		array(),
 		filemtime( plugin_dir_path( genesis_blocks_main_plugin_file() ) . 'dist/style-blocks.build.css' )
 	);
+
+	// Load editor-specific styles only in the admin/editor context
+	// The 'enqueue_block_assets' hook works correctly with the iframe editor
+	// introduced in WordPress 5.9, preventing the "added to iframe incorrectly" warning
+	if ( is_admin() ) {
+		wp_enqueue_style(
+			'genesis-blocks-block-editor-css',
+			plugins_url( 'dist/blocks.build.css', dirname( __FILE__ ) ),
+			array( 'wp-edit-blocks' ),
+			filemtime( plugin_dir_path( genesis_blocks_main_plugin_file() ) . 'dist/blocks.build.css' )
+		);
+	}
 }
-add_action( 'init', 'genesis_blocks_block_assets' );
+add_action( 'enqueue_block_assets', 'genesis_blocks_block_assets' );
 
 /**
  * Enqueue assets for backend editor
+ *
+ * This function only handles JavaScript and localization now.
+ * Editor styles have been moved to genesis_blocks_block_assets() to work
+ * correctly with the WordPress iframe editor (5.9+).
  *
  * @since 1.0.0
  */
@@ -48,13 +69,9 @@ function genesis_blocks_editor_assets() {
 		true
 	);
 
-	// Load the compiled styles into the editor.
-	wp_enqueue_style(
-		'genesis-blocks-block-editor-css',
-		plugins_url( 'dist/blocks.build.css', dirname( __FILE__ ) ),
-		array( 'wp-edit-blocks' ),
-		filemtime( plugin_dir_path( genesis_blocks_main_plugin_file() ) . 'dist/blocks.build.css' )
-	);
+	// Note: Editor styles (blocks.build.css) are now loaded via the
+	// 'enqueue_block_assets' hook in genesis_blocks_block_assets()
+	// This prevents the "added to iframe incorrectly" warning in WordPress 5.9+
 
 	$user_data = wp_get_current_user();
 	unset( $user_data->user_pass, $user_data->user_email );

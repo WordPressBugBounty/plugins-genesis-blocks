@@ -71,7 +71,7 @@ final class ManualRequireTest extends TestCase {
 		$this->assertEquals(
 			10,
 			has_action(
-				'init',
+				'enqueue_block_assets',
 				'genesis_blocks_block_assets'
 			)
 		);
