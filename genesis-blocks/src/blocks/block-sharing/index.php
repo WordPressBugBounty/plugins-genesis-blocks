@@ -90,6 +90,13 @@ function genesis_blocks_social_icon_footer_script() {
 			var top  = ( window.innerHeight / 2 )-( h / 2 );
 			return window.open(url, title, 'toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, resizable=no, copyhistory=no, width=600, height=600, top='+top+', left='+left);
 		}
+		// Open share popup via data attributes; never reads executable context from the DOM.
+		document.addEventListener( 'click', function( e ) {
+			var el = e.target && e.target.closest( '[data-gb-share-url]' );
+			if ( ! el ) { return; }
+			e.preventDefault();
+			genesisBlocksShare( el.getAttribute( 'data-gb-share-url' ), el.getAttribute( 'data-gb-share-label' ) || '', '600', '600' );
+		} );
 	</script>
 	<?php
 }
@@ -136,7 +143,7 @@ function genesis_blocks_render_sharing( $attributes ) {
 
 	if ( isset( $attributes['twitter'] ) && $attributes['twitter'] ) {
 
-		$href_format = sprintf( 'href="javascript:void(0)" onClick="javascript:genesisBlocksShare(\'%1$s\', \'%2$s\', \'600\', \'600\')"', esc_url( $twitter_url ), esc_html__( 'Share on Twitter', 'genesis-blocks' ) );
+		$href_format = sprintf( 'href="%1$s" data-gb-share-url="%1$s" data-gb-share-label="%2$s"', esc_url( $twitter_url ), esc_attr__( 'Share on Twitter', 'genesis-blocks' ) );
 
 		if ( $is_amp_endpoint ) {
 			$href_format = sprintf( 'href="%1$s"', esc_url( $twitter_url ) );
@@ -159,7 +166,7 @@ function genesis_blocks_render_sharing( $attributes ) {
 
 	if ( isset( $attributes['facebook'] ) && $attributes['facebook'] ) {
 
-		$href_format = sprintf( 'href="javascript:void(0)" onClick="javascript:genesisBlocksShare(\'%1$s\', \'%2$s\', \'600\', \'600\')"', esc_url( $facebook_url ), esc_html__( 'Share on Facebook', 'genesis-blocks' ) );
+		$href_format = sprintf( 'href="%1$s" data-gb-share-url="%1$s" data-gb-share-label="%2$s"', esc_url( $facebook_url ), esc_attr__( 'Share on Facebook', 'genesis-blocks' ) );
 
 		if ( $is_amp_endpoint ) {
 			$href_format = sprintf( 'href="%1$s"', esc_url( $facebook_url ) );
@@ -182,7 +189,7 @@ function genesis_blocks_render_sharing( $attributes ) {
 
 	if ( isset( $attributes['pinterest'] ) && $attributes['pinterest'] ) {
 
-		$href_format = sprintf( 'href="javascript:void(0)" onClick="javascript:genesisBlocksShare(\'%1$s\', \'%2$s\', \'600\', \'600\')"', esc_url( $pinterest_url ), esc_html__( 'Share on Pinterest', 'genesis-blocks' ) );
+		$href_format = sprintf( 'href="%1$s" data-gb-share-url="%1$s" data-gb-share-label="%2$s"', esc_url( $pinterest_url ), esc_attr__( 'Share on Pinterest', 'genesis-blocks' ) );
 
 		if ( $is_amp_endpoint ) {
 			$href_format = sprintf( 'href="%1$s"', esc_url( $pinterest_url ) );
@@ -205,7 +212,7 @@ function genesis_blocks_render_sharing( $attributes ) {
 
 	if ( isset( $attributes['linkedin'] ) && $attributes['linkedin'] ) {
 
-		$href_format = sprintf( 'href="javascript:void(0)" onClick="javascript:genesisBlocksShare(\'%1$s\', \'%2$s\', \'600\', \'600\')"', esc_url( $linkedin_url ), esc_html__( 'Share on LinkedIn', 'genesis-blocks' ) );
+		$href_format = sprintf( 'href="%1$s" data-gb-share-url="%1$s" data-gb-share-label="%2$s"', esc_url( $linkedin_url ), esc_attr__( 'Share on LinkedIn', 'genesis-blocks' ) );
 
 		if ( $is_amp_endpoint ) {
 			$href_format = sprintf( 'href="%1$s"', esc_url( $linkedin_url ) );
@@ -228,7 +235,7 @@ function genesis_blocks_render_sharing( $attributes ) {
 
 	if ( isset( $attributes['reddit'] ) && $attributes['reddit'] ) {
 
-		$href_format = sprintf( 'href="javascript:void(0)" onClick="javascript:genesisBlocksShare(\'%1$s\', \'%2$s\', \'600\', \'600\')"', esc_url( $reddit_url ), esc_html__( 'Share on Reddit', 'genesis-blocks' ) );
+		$href_format = sprintf( 'href="%1$s" data-gb-share-url="%1$s" data-gb-share-label="%2$s"', esc_url( $reddit_url ), esc_attr__( 'Share on Reddit', 'genesis-blocks' ) );
 
 		if ( $is_amp_endpoint ) {
 			$href_format = sprintf( 'href="%1$s"', esc_url( $reddit_url ) );

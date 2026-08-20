@@ -4,7 +4,7 @@ Donate link: https://studiopress.com
 Tags: block, blocks, editor, gutenberg, gutenberg blocks
 Requires at least: 6.1
 Tested up to: 7.0
-Stable tag: 3.1.10
+Stable tag: 3.1.11
 Requires PHP: 7.1
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,9 @@ Yes, you will need to have WordPress 5.3 or later installed to take advantage of
 3. Some of the many blocks included in Genesis Blocks
 
 == Changelog ==
+
+= 3.1.11 =
+* Security: Fix a stored cross-site scripting vulnerability in the Sharing block.
 
 = 3.1.10 =
 * Fixed: Correct stylesheet loading to fix a regression in 3.1.9 where theme styles could load before block styles on the frontend.

@@ -53,7 +53,7 @@ final class ManualRequireTest extends TestCase {
 		$this->module = new ManualRequire(
 			[
 				'url'     => 'https://example.com/wp-content/plugins/genesis-blocks/',
-				'path'    => dirname( dirname( dirname( dirname( __FILE__ ) ) ) ) . '/',
+				'path'    => dirname( __DIR__, 3 ) . '/',
 				'version' => 1,
 				'theme'   => 'unknown',
 			]
